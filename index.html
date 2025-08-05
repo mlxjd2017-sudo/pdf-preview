@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF 预览服务</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 20px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f7fa;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        h1 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.8rem;
+        }
+        .document-info {
+            padding: 16px 32px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 0.9rem;
+            color: #495057;
+            display: flex;
+            justify-content: space-between;
+        }
+        .viewer-container {
+            height: 85vh;
+            min-height: 500px;
+            position: relative;
+            background: #525659; /* 深色背景便于PDF查看 */
+        }
+        embed {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        footer {
+            text-align: center;
+            padding: 16px;
+            color: #6c757d;
+            font-size: 0.85rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PDF 文档预览</h1>
+            <div class="buttons">
+                <a href="https://github.com/your-username/your-repo" target="_blank" 
+                   style="color: white; text-decoration: none; margin-right: 15px;">仓库链接</a>
+            </div>
+        </header>
+        
+        <div class="document-info">
+            <span>文档名称: <strong id="fileName">Profile.pdf</strong></span>
+            <span>最后更新: <span id="lastUpdate">2025年8月5日</span></span>
+        </div>
+        
+        <div class="viewer-container">
+            <!-- PDF 预览区域 -->
+            <embed 
+                id="pdfViewer"
+                src="https://github.com/user-attachments/files/21589087/Profile.pdf" 
+                type="application/pdf">
+        </div>
+        
+        <footer>
+            基于 GitHub Pages 与 jsDelivr | 自动更新服务 | 文档版本 v1.0
+        </footer>
+    </div>
+
+    <script>
+        // 自动设置文件名和时间
+        document.getElementById('fileName').textContent = document.title;
+        
+        // 设置最后更新时间
+        const lastUpdate = new Date();
+        document.getElementById('lastUpdate').textContent = 
+            `${lastUpdate.getFullYear()}年${lastUpdate.getMonth()+1}月${lastUpdate.getDate()}日`;
+        
+        // 移动设备优化
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+            document.getElementById('pdfViewer').style.height = '75vh';
+        }
+    </script>
+</body>
+</html>
